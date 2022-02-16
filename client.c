@@ -6,7 +6,7 @@
 /*   By: tnard <tnard@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 15:01:18 by tnard             #+#    #+#             */
-/*   Updated: 2021/12/30 21:41:11 by tnard            ###   ########lyon.fr   */
+/*   Updated: 2022/02/16 10:59:18 by tnard            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "libft/libft.h"
 
 int		g_result = 0;
-int		g_pid = 0;
-char	*g_str;
 
 static void	ft_kill(int pid, char *str)
 {
@@ -65,7 +63,6 @@ static void	action(int sig)
 			ft_putchar_fd('/', 1);
 			ft_putnbr_fd(g_result, 1);
 			ft_putchar_fd('\n', 1);
-			ft_kill(g_pid, g_str);
 			exit(1);
 		}
 		exit(0);
@@ -94,9 +91,7 @@ int	main(int argc, char **argv)
 	g_result = ft_strlen(argv[2]);
 	signal(SIGUSR1, action);
 	signal(SIGUSR2, action);
-	g_pid = ft_atoi(argv[1]);
-	g_str = argv[2];
-	ft_kill(g_pid, g_str);
+	ft_kill(ft_atoi(argv[1]), argv[2]);
 	while (42)
 		pause();
 	return (0);

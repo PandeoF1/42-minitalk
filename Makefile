@@ -6,7 +6,7 @@
 #    By: tnard <tnard@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 16:54:23 by tnard             #+#    #+#              #
-#    Updated: 2021/12/12 05:25:46 by tnard            ###   ########lyon.fr    #
+#    Updated: 2022/02/16 11:03:28 by tnard            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ server: server.o libft
 
 client: client.o libft
 	@$(CC) -o $@ $< -Llibft -lft
-	@echo "\033[0;32m[END]\033[0m $(NAME)"
+	@printf "\033[2K\r\033[0;32m[END]\033[0m $(NAME)\n"
 
 %.o: %.c
 	@$(CC) -c $(CFLAGS) $?
@@ -41,11 +41,11 @@ libft:
 	@make -C libft
 
 clean:
-	rm -f $(OBJECTS)
-	make -C libft clean
+	@rm -f $(OBJECTS)
+	@make -C libft clean
 	
 fclean: clean
-	rm -f server client libft/libft.a
+	@rm -f server client libft/libft.a
 
 re: fclean all
 

